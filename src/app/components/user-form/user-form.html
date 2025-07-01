@@ -1,0 +1,57 @@
+<div class="container mt-4">
+    <h2>{{ isEdit ? 'Edit User' : 'Add User' }}</h2>
+    <form (ngSubmit)="saveUser()" #f="ngForm">
+      <div class="mb-3">
+        <label>First Name</label>
+        <input class="form-control" [(ngModel)]="user.firstName" name="firstName" required />
+      </div>
+      <div class="mb-3">
+        <label>Last Name</label>
+        <input class="form-control" [(ngModel)]="user.lastName" name="lastName" required />
+      </div>
+      <div class="mb-3">
+        <label>Email</label>
+        <input class="form-control" [(ngModel)]="user.email" name="email" required />
+      </div>
+      <div class="mb-3">
+        <label>Address</label>
+        <input class="form-control" [(ngModel)]="user.address" name="address" required />
+      </div>
+      <div class="mb-3">
+        <label>City</label>
+        <input class="form-control" [(ngModel)]="user.city" name="city" />
+      </div>
+      <div class="mb-3">
+        <label>State</label>
+        <select class="form-select" [(ngModel)]="user.state" name="state">
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Gujarat">Gujarat</option>
+          <option value="Karnataka">Karnataka</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label>Country</label>
+        <select class="form-select" [(ngModel)]="user.country" name="country">
+          <option value="India">India</option>
+          <option value="United States">United States</option>
+          <option value="United Kingdom">United Kingdom</option>
+        </select>
+      </div>
+       
+      <div class="mb-3">
+        <label>Date of Birth</label>
+        <input class="form-control" type="date" [(ngModel)]="user.dob" name="dob" />
+      </div>
+      <div class="mb-3">
+        <label>Username</label>
+        <input class="form-control" [(ngModel)]="user.userName" name="userName" />
+      </div>
+      <div class="mb-3">
+        <label>Password</label>
+        <input class="form-control" [(ngModel)]="user.password" name="password" type="password" />
+      </div>
+      <button type="submit" class="btn btn-success">Save</button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+  
