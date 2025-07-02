@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, UserService } from '../../services/user';
 import { CommonModule } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-list',
@@ -12,8 +13,13 @@ import { CommonModule } from '@angular/common';
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
+  userToDelete: string | null = null;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.loadUsers();
@@ -23,10 +29,19 @@ export class UserListComponent implements OnInit {
     this.users = this.userService.getUsers();
   }
 
-  deleteUser(uid: string) {
-    if (confirm('Are you sure you want to delete this user?')) {
-      this.userService.deleteUser(uid);
+  openDeleteModal(content: any, uid: string) {
+    this.userToDelete = uid;
+    this.modalService.open(content, {
+      ariaLabelledBy: 'delete-modal-title',
+      centered: true,
+    });
+  }
+
+  confirmDelete() {
+    if (this.userToDelete) {
+      this.userService.deleteUser(this.userToDelete);
       this.loadUsers();
+      this.modalService.dismissAll();
     }
   }
 
